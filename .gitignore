@@ -1,0 +1,33 @@
+# Build artifacts
+naab/build/
+bin/
+*.o
+*.so
+
+# Generated sources (self-synthesized)
+src/*.rs.tmp
+src/*.go.tmp
+
+# Test outputs
+test-output/
+*.log
+
+# Cache
+.cache/
+
+# Python
+__pycache__/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+
+# Secrets
+config/*.pem
+config/*.key
+config/*.secret
+config/*.srl

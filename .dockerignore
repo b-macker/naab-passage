@@ -1,0 +1,37 @@
+# Git
+.git/
+.gitignore
+
+# Build artifacts
+naab/build/
+bin/
+*.o
+*.so
+
+# Test outputs
+test-output/
+*.log
+
+# Cache
+.cache/
+
+# Python
+__pycache__/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+
+# Docs
+docs/
+
+# GitHub
+.github/
+
+# Development
+*.md
+LICENSE

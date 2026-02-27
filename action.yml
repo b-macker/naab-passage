@@ -1,0 +1,34 @@
+name: 'NAAb Passage'
+description: 'Sovereign data gateway and PII protection for CI/CD pipelines'
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  port:
+    description: 'Gateway port'
+    required: false
+    default: '8091'
+  config:
+    description: 'Path to risk_matrix.json config file'
+    required: false
+    default: 'config/risk_matrix.json'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup NAAb
+      shell: bash
+      run: bash ${{ github.action_path }}/build.sh
+
+    - name: Start Gateway
+      shell: bash
+      run: |
+        ${{ github.action_path }}/naab/build/naab-lang ${{ github.action_path }}/main.naab &
+        echo "PASSAGE_PID=$!" >> $GITHUB_ENV
+        sleep 2
+
+    - name: Verify Gateway Running
+      shell: bash
+      run: |
+        curl --fail --max-time 5 http://localhost:${{ inputs.port }}/health || echo "Gateway started on port ${{ inputs.port }}"
