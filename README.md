@@ -28,6 +28,41 @@ Result: Zero PII leakage with mathematical certainty
 
 ---
 
+## Demo
+
+See NAAb Passage in action detecting and blocking PII leakage:
+
+### Test 1: Clean Request ✅
+**Safe API request with no sensitive data** → ALLOWED
+
+![Test 1 - Clean Request Allowed](demos/screenshots/Test_1.jpg)
+
+### Test 2: PII Detection 🚫
+**Request containing SSN, credit card, and email** → BLOCKED
+
+![Test 2 - PII Detected and Blocked](demos/screenshots/Test_2.jpg)
+
+Passage detected:
+- ✗ Email: `john.doe@example.com` (Score: 20)
+- ✗ SSN: `123-45-6789` (Score: 100)
+- ✗ Credit Card: `4532-****-****-9010` (Score: 80)
+- **Total Risk: 200** (threshold: 90) → **BLOCKED**
+
+### Test 3: Schema Smuggling Attack 🚫
+**Unauthorized field in request** → BLOCKED
+
+![Test 3 - Smuggling Attack Blocked](demos/screenshots/Test_3.jpg)
+
+**Try the demo yourself:**
+```bash
+cd demos
+./passage-demo.sh
+```
+
+See [DEMO_GUIDE.md](DEMO_GUIDE.md) for recording instructions.
+
+---
+
 ## Quick Start
 
 ```bash
