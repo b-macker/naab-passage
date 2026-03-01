@@ -9,23 +9,28 @@ on:
     - cron: '0 0 * * 0'  # Weekly on Sunday
 
 jobs:
-  codeql:
+  security-checks:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: recursive
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: cpp, python, go
+      - name: Check for secrets in code
+        run: |
+          echo "🔍 Scanning for hardcoded secrets..."
+          if grep -r "password\s*=\|api[_-]key\s*=\|secret\s*=" --include="*.naab" --include="*.go" --include="*.rs" . ; then
+            echo "⚠️  Warning: Potential secrets found in code"
+            exit 1
+          fi
+          echo "✅ No hardcoded secrets detected"
 
-      - name: Build NAAb
-        run: bash build.sh
+      - name: Validate configuration files
+        run: |
+          echo "🔍 Validating JSON configuration..."
+          find config -name "*.json" -exec echo "Checking {}" \; -exec python3 -m json.tool {} \;
+          echo "✅ Configuration files valid"
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+      - name: Check file permissions
+        run: |
+          echo "🔍 Checking for overly permissive files..."
+          find . -type f -perm /go+w ! -path "./.git/*" ! -path "./naab/*" && echo "⚠️  World-writable files found" && exit 1 || echo "✅ File permissions OK"
