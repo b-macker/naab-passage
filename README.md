@@ -1,7 +1,12 @@
 # NAAb Passage
 
+[![CI](https://github.com/b-macker/naab-passage/actions/workflows/ci.yml/badge.svg)](https://github.com/b-macker/naab-passage/actions/workflows/ci.yml)
+[![Security Scan](https://github.com/b-macker/naab-passage/actions/workflows/security-scan.yml/badge.svg)](https://github.com/b-macker/naab-passage/actions/workflows/security-scan.yml)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/b-macker/naab-passage/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![NAAb](https://img.shields.io/badge/NAAb-Ecosystem-purple.svg)](https://github.com/b-macker/NAAb)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Discussions](https://img.shields.io/badge/Discussions-enabled-blue.svg)](https://github.com/b-macker/naab-passage/discussions)
 
 **Sovereign data gateway and PII protection platform** built on the [NAAb Language](https://github.com/b-macker/NAAb). Ensures secure passage for sensitive data by validating schemas, detecting PII, and enforcing policies before data reaches untrusted systems.
 
