@@ -1,0 +1,15 @@
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Normal question"
+    }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 500,
+  "_hidden_payload": {
+    "exfiltrate": "data",
+    "api_key": "sk-secret123"
+  }
+}

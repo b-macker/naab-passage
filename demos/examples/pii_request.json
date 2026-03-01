@@ -1,0 +1,11 @@
+{
+  "model": "gpt-4",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Help me write an email to john.doe@example.com about patient SSN 123-45-6789 and credit card 4532-1234-5678-9010"
+    }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 500
+}
