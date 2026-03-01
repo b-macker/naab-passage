@@ -117,9 +117,10 @@ Edit `config/risk_matrix.json` to customize PII policies:
 
 ## NAAb Ecosystem
 
-- **[NAAb Language](https://github.com/b-macker/NAAb)** — Core polyglot scripting language
-- **[NAAb BOLO](https://github.com/b-macker/naab-bolo)** — Code executor and validator
-- **NAAb Passage** (this project) — Sovereign data gateway
+- **[NAAb Language](https://github.com/b-macker/NAAb)** — Core polyglot scripting language with governance
+- **[NAAb BOLO](https://github.com/b-macker/naab-bolo)** — Code governance & AI validation (50+ checks)
+- **[NAAb Pivot](https://github.com/b-macker/naab-pivot)** — Code evolution & optimization (3-60x speedups)
+- **NAAb Passage** (this project) — Data gateway & PII protection (zero leakage)
 
 ---
 
