@@ -53,6 +53,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -60,7 +61,14 @@
             color: var(--text);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
 
@@ -133,8 +141,8 @@
 
         /* Feature Cards */
         .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-        .f-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: border-color 0.2s; }
-        .f-card:hover { border-color: var(--border-highlight); }
+        .f-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: all 0.3s ease; }
+        .f-card:hover { border-color: var(--border-highlight); transform: translateY(-4px); }
         .f-card .icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 16px; }
         .f-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
         .f-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
@@ -158,8 +166,8 @@
 
         /* Ecosystem */
         .ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-        .eco-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center; transition: border-color 0.2s; text-decoration: none; }
-        .eco-card:hover { border-color: var(--border-highlight); }
+        .eco-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center; transition: all 0.3s ease; text-decoration: none; }
+        .eco-card:hover { border-color: var(--border-highlight); transform: translateY(-4px); }
         .eco-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
         .eco-card p { color: var(--text-muted); font-size: 0.85rem; }
         .eco-card .eco-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
@@ -231,10 +239,10 @@
 
 <div class="container" style="padding-bottom: 60px;">
     <div class="stats-bar">
-        <div class="stat"><div class="num">100%</div><div class="label">Detection Rate</div></div>
-        <div class="stat"><div class="num">&lt;0.01%</div><div class="label">False Positives</div></div>
-        <div class="stat"><div class="num">3</div><div class="label">Compliance Standards</div></div>
-        <div class="stat"><div class="num">0</div><div class="label">PII Leakage</div></div>
+        <div class="stat reveal"><div class="num">100%</div><div class="label">Detection Rate</div></div>
+        <div class="stat reveal reveal-delay-1"><div class="num">&lt;0.01%</div><div class="label">False Positives</div></div>
+        <div class="stat reveal reveal-delay-2"><div class="num">3</div><div class="label">Compliance Standards</div></div>
+        <div class="stat reveal reveal-delay-3"><div class="num">0</div><div class="label">PII Leakage</div></div>
     </div>
 </div>
 
@@ -249,32 +257,32 @@
         </div>
 
         <div class="features-grid">
-            <div class="f-card">
+            <div class="f-card reveal">
                 <div class="icon icon-green">&#9899;</div>
                 <h3>Sovereign Architecture</h3>
                 <p>NAAb owns all decisions. Polyglot workers are "dumb muscle" &mdash; they execute, they don't decide. No worker can override the gateway.</p>
             </div>
-            <div class="f-card">
+            <div class="f-card reveal reveal-delay-1">
                 <div class="icon icon-purple">&#9881;</div>
                 <h3>Self-Synthesizing</h3>
                 <p>Compiles worker binaries at boot time with SHA-256 verification. Forensic shredding on shutdown. No pre-built binaries to tamper with.</p>
             </div>
-            <div class="f-card">
+            <div class="f-card reveal reveal-delay-2">
                 <div class="icon icon-orange">&#9888;</div>
                 <h3>PII Detection</h3>
                 <p>SSN, credit cards, emails, phone numbers, API keys. Risk scoring with configurable thresholds. Blocks requests exceeding limits.</p>
             </div>
-            <div class="f-card">
+            <div class="f-card reveal">
                 <div class="icon icon-cyan">&#128274;</div>
                 <h3>Schema Enforcement</h3>
                 <p>Strict JSON schema validation. Unauthorized fields rejected. Anti-smuggling prevents payload injection attacks.</p>
             </div>
-            <div class="f-card">
+            <div class="f-card reveal reveal-delay-1">
                 <div class="icon icon-blue">&#9729;</div>
                 <h3>Hardware Isolation</h3>
                 <p>CPU pinning, network namespaces, memory isolation. Designed for hostile cloud environments where the infrastructure itself is untrusted.</p>
             </div>
-            <div class="f-card">
+            <div class="f-card reveal reveal-delay-2">
                 <div class="icon icon-red">&#9745;</div>
                 <h3>Compliance Ready</h3>
                 <p>HIPAA, GDPR, SOC2 compliant out of the box. Audit logging, data lineage tracking, and retention policies built in.</p>
@@ -294,7 +302,7 @@
         </div>
 
         <div class="code-showcase">
-            <div class="code-panel">
+            <div class="code-panel reveal">
                 <div class="tab-bar">
                     <div class="tab active">Request Flow</div>
                 </div>
@@ -313,7 +321,7 @@
 <span class="ok">  Risk &lt; threshold? PASS</span>
 <span class="ok">  Log everything for audit trail</span></pre>
             </div>
-            <div class="code-panel">
+            <div class="code-panel reveal reveal-delay-1">
                 <div class="tab-bar">
                     <div class="tab active">Terminal</div>
                 </div>
@@ -348,17 +356,17 @@
         </div>
 
         <div class="ecosystem-grid">
-            <a href="https://b-macker.github.io/NAAb/" class="eco-card">
+            <a href="https://b-macker.github.io/NAAb/" class="eco-card reveal">
                 <div class="eco-badge eco-main">Core Language</div>
                 <h3>NAAb Language</h3>
                 <p>The polyglot programming language with built-in LLM governance. 12 languages, one file. The foundation everything is built on.</p>
             </a>
-            <a href="https://b-macker.github.io/naab-bolo/" class="eco-card">
+            <a href="https://b-macker.github.io/naab-bolo/" class="eco-card reveal reveal-delay-1">
                 <div class="eco-badge eco-tool">Governance Tool</div>
                 <h3>NAAb BOLO</h3>
                 <p>Code governance and AI validation. 50+ checks catch oversimplified stubs, hallucinated APIs, and incomplete logic.</p>
             </a>
-            <a href="https://b-macker.github.io/naab-pivot/" class="eco-card">
+            <a href="https://b-macker.github.io/naab-pivot/" class="eco-card reveal reveal-delay-2">
                 <div class="eco-badge eco-tool">Optimization Tool</div>
                 <h3>NAAb Pivot</h3>
                 <p>Automatic code optimization. Rewrite slow code in faster languages with mathematical proof of correctness. 3-60x speedups.</p>
@@ -393,6 +401,18 @@
         </div>
     </div>
 </footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 50 ? 'rgba(10, 14, 23, 0.95)' : 'rgba(10, 14, 23, 0.85)';
+});
+</script>
 
 </body>
 </html>
