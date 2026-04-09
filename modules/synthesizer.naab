@@ -14,10 +14,10 @@ fn shred_file(path) {
 
 export fn synthesize_absolute(risk_profile) {
     io.write("  [ABS-SYNTH] Initializing Hardware-Aware Transmutation...\n")
-    
+
     let bin_dir = "bin/"
     let src_dir = "src/"
-    
+
     let rust_template = "// Absolute Hardened Shield\nuse std::io::{Read, Write};\nuse std::os::unix::net::UnixListener;\nuse std::fs;\nfn main() {\n    let sock = \"/data/data/com.termux/files/usr/tmp/passage_shield.sock\";\n    let _ = fs::remove_file(sock);\n    let listener = UnixListener::bind(sock).unwrap();\n    for stream in listener.incoming() {\n        if let Ok(mut s) = stream {\n            let mut buf = String::new();\n            if let Ok(_) = s.read_to_string(&mut buf) {\n                s.write_all(b\"[]\").unwrap();\n            }\n        }\n    }\n}\n"
 
     let rust_bin = bin_dir + "shield_vessel"
@@ -32,7 +32,9 @@ res
 >>
 
     if needs_compile == "YES" {
-        <<bash[bin_dir, src_dir] mkdir -p "$bin_dir" "$src_dir" >>
+        <<bash[bin_dir, src_dir]
+        mkdir -p "$bin_dir" "$src_dir"
+>>
         file.write(rust_src, rust_template)
         io.write("    [ABS-SYNTH] Compiling Hardened Rust Muscle...\n")
         <<bash[rust_src, rust_bin]
