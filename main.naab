@@ -15,14 +15,14 @@ main {
 
     let profile = {"mode": "INDUSTRIAL"}
     let workers = synthesizer.synthesize_absolute(json.stringify(profile))
-    
+
     io.write("  [SOVEREIGN] Mobilizing Isolated Worker Swarm...\n")
     let shield_bin = workers["shield"]
-    
+
     <<bash[shield_bin]
     unshare -n taskset -c 1 "$shield_bin" &
 >>
-    
+
     io.write("  [SOVEREIGN] Core 1: Shield Isolated. Launching Gateway...\n")
     gateway.start_service(profile, workers)
 

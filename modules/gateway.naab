@@ -8,10 +8,10 @@ use string
 
 export fn start_service(config, workers) {
     io.write("  [GATEWAY] Initializing Industrial Interceptor on :8091...\n")
-    
+
     let go_src = "verification/ch0_full_projects/Vigilant/src/gateway.go"
     let go_bin = "verification/ch0_full_projects/Vigilant/bin/gateway_vessel"
-    
+
     let go_code = <<python
 src = """package main
 import (
@@ -31,7 +31,7 @@ var counter uint64
 func handle(w http.ResponseWriter, r *http.Request) {
     idx := atomic.AddUint64(&counter, 1) % uint64(len(shards))
     sock := shards[idx]
-    
+
     // Dial with a short timeout to prevent hangs
     conn, err := net.DialTimeout("unix", sock, 2*time.Second)
     if err != nil {
@@ -42,7 +42,7 @@ func handle(w http.ResponseWriter, r *http.Request) {
 
     body, _ := io.ReadAll(r.Body)
     conn.Write(body)
-    
+
     // Signal EOF to the brain
     if cw, ok := conn.(*net.UnixConn); ok {
         cw.CloseWrite()
@@ -68,7 +68,7 @@ src # Return the source
 >>
 
     file.write(go_src, go_code)
-    
+
     io.write("    [GATEWAY] Compiling Sovereign Pipe...\n")
     <<bash[go_src, go_bin]
     export CGO_ENABLED=0

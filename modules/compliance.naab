@@ -8,7 +8,7 @@ use json
 
 export fn log_event(event_data, last_hash, secret_key) {
     let raw_entry = json.stringify(event_data)
-    
+
     let encrypted_data = <<python[raw_entry, secret_key]
 import json, hashlib
 # In a real system, we'd use Cryptography.Hazmat for AES-GCM
@@ -26,7 +26,7 @@ print(h)
         "payload": encrypted_data,
         "hash": new_hash
     }
-    
+
     file.append("verification/ch0_full_projects/Vigilant/audit.log", json.stringify(entry) + "
 ")
     return new_hash

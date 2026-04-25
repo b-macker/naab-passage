@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "project_name": "NAAb-Passage",
+  "mode": "enforce",
+  "description": "Passage — Sovereign Data Gateway & PII Protection.",
+
+  "languages": {
+    "require_explicit": true,
+    "allowed": ["python", "bash", "shell"]
+  },
+
+  "capabilities": {
+    "network": true,
+    "shell": true,
+    "filesystem": {
+      "allowed_paths": ["./"]
+    }
+  },
+
+  "code_quality": {
+    "no_secrets": { "enabled": true, "level": "hard" },
+    "no_stub_functions": { "enabled": true, "level": "soft" },
+    "no_todo_comments": { "enabled": true, "level": "advisory" }
+  }
+}

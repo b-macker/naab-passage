@@ -8,7 +8,7 @@ use string
 export fn activate_absolute_loop() {
     io.write("  [BRAIN] Activating Industrial Decision Loop (v7.0)...\n")
     let schema = {"model": "string", "messages": "array", "max_tokens": "int"}
-    
+
     let server = <<python[schema]
 import socket, os, json, sys
 p = "/data/data/com.termux/files/usr/tmp/passage_brain.sock"
@@ -30,10 +30,10 @@ while True:
             chunk = c.recv(4096)
             if not chunk: break
             data_bytes += chunk
-        
+
         d = data_bytes.decode('utf-8')
         sys.stderr.write(f"[BRAIN] Received {len(d)} bytes\n")
-        
+
         if not d:
             c.close()
             continue
@@ -44,11 +44,11 @@ while True:
             if k not in schema:
                 res = {"error": "SCHEMA_VIOLATION", "msg": k}
                 break
-        
+
         if "error" not in res:
             if "123456789" in d.replace(".", "").replace("-", ""):
                 res = {"error": "POLICY_VIOLATION"}
-        
+
         resp_json = json.dumps(res)
         sys.stderr.write(f"[BRAIN] Sending response: {resp_json}\n")
         c.sendall(resp_json.encode('utf-8'))
