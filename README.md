@@ -1,20 +1,22 @@
-# NAAb Passage
+# NAAb Passage — Stop PII From Reaching Your LLMs
 
 [![CI](https://github.com/b-macker/naab-passage/actions/workflows/ci.yml/badge.svg)](https://github.com/b-macker/naab-passage/actions/workflows/ci.yml)
 [![Security Scan](https://github.com/b-macker/naab-passage/actions/workflows/security-scan.yml/badge.svg)](https://github.com/b-macker/naab-passage/actions/workflows/security-scan.yml)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/b-macker/naab-passage/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![NAAb](https://img.shields.io/badge/NAAb-Ecosystem-purple.svg)](https://github.com/b-macker/NAAb)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Discussions](https://img.shields.io/badge/Discussions-enabled-blue.svg)](https://github.com/b-macker/naab-passage/discussions)
 
-**Sovereign data gateway and PII protection platform** built on the [NAAb Language](https://github.com/b-macker/NAAb). Ensures secure passage for sensitive data by validating schemas, detecting PII, and enforcing policies before data reaches untrusted systems.
+SSNs, credit cards, API keys, health records — intercepted and redacted before they leave your system. Passage sits between your application and any external LLM or API and enforces a zero-leakage policy.
 
 ```
-Input:  API request with potential PII
-Output: Validated, redacted, or blocked request
-Result: Zero PII leakage with mathematical certainty
+POST /  {"prompt": "Patient SSN: 123-45-6789, diagnose this"}
+→ {"error": "POLICY_VIOLATION", "blocked": ["ssn_pattern"]}
+
+POST /  {"prompt": "What are symptoms of a cold?"}
+→ {"response": "..."}  ✓ clean request passes through
 ```
+
+Sovereign architecture — all decisions made locally, no data sent to classify. HIPAA · GDPR · SOC2 · Part of the [NAAb ecosystem](https://github.com/b-macker/NAAb)
 
 ---
 
@@ -182,3 +184,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 _NAAb Passage — Secure passage for sensitive data._
+
